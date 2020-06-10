@@ -22,7 +22,7 @@ public class AccessPolicyExamples {
     public static Utf8String s4 = new Utf8String("3");
     public static final DynamicArray<Utf8String> access_policy_attribute = new DynamicArray<Utf8String>(s1, s2, s3, s4);
 
-
+//50 -26 58 42 17 91 -2 120 -53 100 51 124 21 -6 19 54 -94 -89 59 -29 -67 71 -85 118 109 -123 -9 -72 99 -81 72 8
 
     public static final String access_policy_example_v = "60";//DU输入的
     public static final String access_policy_example_v2 = "50";//DU输入的

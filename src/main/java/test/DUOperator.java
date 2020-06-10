@@ -117,7 +117,6 @@ public class DUOperator {
                     if (temp) {
                         //得到加密的文件
                         file = new String(IpfsFile.get(huffmanImpl1.decode(result2)));
-                        System.out.println("得到的文件是" + file);
                     }
                 } else {
                     System.out.println("哈夫曼解码失败");
@@ -174,13 +173,13 @@ public class DUOperator {
             String skp = lsss.getSecretKey().send().getValue();
             String tt = new String(IpfsFile.get(skp));//字符串
             HuffmanAlgorithmImpl1 huffmanImpl1 = new HuffmanAlgorithmImpl1();
-            System.out.println("tt:" + tt);
+            //  System.out.println("tt:" + tt);
             byteArraySecretKey = huffmanImpl1.conver2StringToByte(tt);//得到cipher
 
 
             String ct1 = new String(IpfsFile.get(ct));
             byteArrayCiphertext = huffmanImpl1.conver2StringToByte(ct1);
-           /* System.out.println("DU输出的密文是" + byteArrayCiphertext);*/
+            /* System.out.println("DU输出的密文是" + byteArrayCiphertext);*/
 
 
             //将skpie变成sk
@@ -205,17 +204,19 @@ public class DUOperator {
             byte[] ck = new byte[32];
             for (int i = 0; i < ck.length; i++) {
                 ck[i] = (byte) (k1_[i] ^ k2[i]);
+                System.out.print(ck[i] + " ");//ck得到的是对的
             }
 
             Cipher cipher1 = Cipher.getInstance("AES");// 创建密码器
             SecretKeySpec key1 = new SecretKeySpec(ck, "AES");
             cipher1.init(Cipher.DECRYPT_MODE, key1);// 初始化为解密模式的密码器
 
-            byte[] file_ = cipher1.doFinal(file.getBytes());// 解密
+            byte[] file_ = cipher1.doFinal(huffmanImpl1.conver2StringToByte(file));// 解密
             InputStream in = new ByteArrayInputStream(file_);
             File file1 = new File(addr);
             if (file1.exists()) {
-                File file2 = new File(file1.getAbsolutePath() + name);
+                File file2 = new File(file1.getAbsolutePath() + "/" + name);
+                System.out.println(file1.getAbsolutePath() + name);
                 if (!file2.exists()) {
                     file2.createNewFile();
                     OutputStream out = new FileOutputStream(file2);

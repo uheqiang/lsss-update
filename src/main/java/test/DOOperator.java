@@ -84,7 +84,7 @@ public class DOOperator {
         assert kgen != null;
         kgen.init(256);
         // 根据用户密码，生成一个密钥
-
+//50 -26 58 42 17 91 -2 120 -53 100 51 124 21 -6 19 54 -94 -89 59 -29 -67 71 -85 118 109 -123 -9 -72 99 -81 72 8
         SecretKey secretKey = kgen.generateKey();
         SecretKey secretKey1 = kgen.generateKey();
         ck = new byte[32];
@@ -94,6 +94,7 @@ public class DOOperator {
         //long k22 = Long.parseLong(Arrays.toString(k2));
         for (int i = 0; i < ck.length; i++) {
             ck[i] = (byte) (k1[i] ^ k2[i]);
+            System.out.print(ck[i] + " ");
         }
         // System.out.println(Arrays.toString(k1) + " " + Arrays.toString(k2) + " " + Arrays.toString(ck));
     }
