@@ -1,0 +1,187 @@
+
+pragma solidity >=0.4.22 <=0.6.9;
+pragma experimental ABIEncoderV2;
+
+contract StorageLSSS{
+	//保存所有的文件的HashFileId
+	bytes32[] HashFileIds;
+
+	//Do定义的属性集合
+	string[] attributes;
+
+	string PK;
+
+	//Du定义的属性集合
+	string[] userattributes;
+
+    //版本号
+	string v;
+
+	//合同的创建者
+	address public owner;
+	//AC
+	address public AC;
+
+	//要输入的文件的HashId
+	bytes32 Hash_Id;
+
+	constructor() public {
+		//声明方法赋值创建合同的DO
+		owner = msg.sender;
+	/*	setHash_FileId("");
+		setCipherText("","");
+		setSecretKey(null,"");
+		setInterval("","");*/
+
+	}
+	//用户的属性，包括用户的地址，用户的私钥以及用户的访问时间。
+	struct User{
+	  string  interval;
+	  string  secretKey; //用户的sk'
+	}
+	//对应文件的Id以及文件的密文。
+	struct Storaged{
+	  bytes32 FileId;
+	  string CT;
+	}
+	//文件的所有者
+	mapping (bytes32 =>Storaged) public dataOwner;
+	//访问的用户结构
+	mapping (address => User) public users;
+	//属性和标识符的结构
+	mapping (string => string[]) private att;
+	//序列化用户属性，将用户的的属性和用户的人对应
+	mapping (address => string[]) public duatt;
+	//序列化用户的版本号
+	mapping (address => string) public duv;
+
+
+	//定义一个判断，判断设置密文和hashfileid的用户与合约创建用户是否是同一人
+	modifier onlyOwner {
+	  if(msg.sender != owner) {
+	    assert(false);
+	  }
+	  _;
+
+	}
+	//定义一个判断，判断文件的hashid是否在HashFileIds中存在
+/*	modifier hashID {
+
+	}*/
+	//算法1 发布元数据集
+	function pub_data(string[]  memory attribute_param,string memory v_param) onlyOwner public{
+		attributes = attribute_param;
+		v = v_param;
+		att[v]=attributes;
+	}
+	//算法3 Do设置文件的HashId
+	function setHash_FileId(bytes32 Hash_Id_param) onlyOwner public returns(bool) {
+         HashFileIds.push(Hash_Id_param);
+         dataOwner[Hash_Id_param].FileId = Hash_Id_param;//属于文件所有者的所有的密文
+         return true;
+	}
+
+	//算法6 Do设置密文 CipherText是Ipfs中文件的路径
+	function setCipherText(bytes32 Hash_Id_param,string memory CipherText_param)  public returns(bool){
+	    if(msg.sender != owner) {
+	    	return false;
+	    }
+    	for (uint256 i = HashFileIds.length - 1; i >= 0; i--) {
+			if(HashFileIds[i] == Hash_Id_param) {
+               dataOwner[Hash_Id_param].CT=CipherText_param;
+        return true;
+			}
+		}
+      return false;
+
+    }
+
+    //算法12  DO设置用户的访问时间
+     function setInterval(address useraddress_param,string memory time_param) onlyOwner public returns(bool){
+       users[useraddress_param].interval=time_param;
+       return true;
+    }
+
+    /* DU执行范围     */
+
+    //算法4 DU执行查找属性集
+    function searchData(string memory  v_param)  view public returns(string[] memory) {
+    	return att[v_param];
+    }
+
+    //算法8 DU用户序列化自己的属性
+    function serializationData(string[] memory attributes_param,string memory du_v) public returns(bool) {
+    	userattributes = attributes_param;
+    	duatt[msg.sender] = userattributes;
+    	duv[msg.sender] = du_v;
+    	return true;
+    }
+
+    //算法11  DU检查hashId  constant常函数不对合约做任何修改
+     function checkHash_FileId(bytes32 Hash_Id_param) view public returns(bool ) {
+        if(dataOwner[Hash_Id_param].FileId==Hash_Id_param)
+        return true;
+    }
+
+    //算法13 DU得到自己的有效访问周期
+     function getInterval() view public returns(string memory){
+        //owner = msg.sender;
+        return users[msg.sender].interval;
+    }
+
+    //算法14 DU得到相应的密文
+     function getCipherText(bytes32 Hash_Id_param) view public returns(string memory) {
+     	for (uint256 i = HashFileIds.length - 1; i >= 0; i--) {
+			if(HashFileIds[i] == Hash_Id_param) {
+              return  dataOwner[Hash_Id_param].CT;
+			}
+		}
+		return "密文不存在";
+    }
+
+    //算法15 DU得到相应的SK’
+     function getSecretKey() view public returns(string memory){
+        //owner = msg.sender;
+        return users[msg.sender].secretKey;
+
+    }
+
+    /*AC  执行范围    */
+
+    //算法9 AC执行 根据用户的地址找到相对应的属性以及版本
+
+    function getData(address duaddress_param) view public returns(string[] memory) {
+    	if(msg.sender != AC) {
+    		return duatt[duaddress_param];
+    	}
+       return duatt[duaddress_param];
+    }
+    //算法10 AC执行 根据用户的地址找到相对应的版本
+
+    function getV(address duaddress_param) view public returns(string memory) {
+    	if(msg.sender != AC) {
+    		return duv[duaddress_param];
+    	}
+       return duv[duaddress_param];
+    }
+
+    //算法10 AC设置用户的私钥
+    function setSecretKey(address useraddress_param,string memory SecretKey_param)  public returns(bool){
+    	if(msg.sender != AC) {
+    		return false;
+    	}
+        users[useraddress_param].secretKey=SecretKey_param;
+        return true;
+    }
+
+     //算法17 AC执行 序列化系统的公钥
+     function setPK(string memory PK_param) public returns(bool){
+        AC = msg.sender;
+        PK = PK_param;
+        return true;
+     }
+     //算法18 DO或者DU执行 得到系统的公钥
+     function getPK() view public returns(string memory) {
+        return PK;
+     }
+}

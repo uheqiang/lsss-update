@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="1" failures="0" name="TestLSSS" time="4.263" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="11.0.7+10-b765.53"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\jbr\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\EDZ\Desktop\rust\lsss"/>
+    <property name="java.vm.vendor" value="JetBrains s.r.o."/>
+    <property name="java.vendor.url" value="https://www.jetbrains.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Users\EDZ\Desktop\rust\lsss"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.runtime.version" value="11.0.7+10-b765.53"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\EDZ\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\plugins\maven\lib\maven3\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\jbr\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\NetSarang\Xlpd 6\;C:\Program Files (x86)\NetSarang\Xmanager 6\;C:\Program Files (x86)\IntelSWTools\OpenCL\sdk\bin\x64;C:\Program Files (x86)\IntelSWTools\OpenCL\sdk\bin\x86;C:\Program Files (x86)\IntelSWTools\OpenCL\sdk\bin\Pin;C:\Program Files (x86)\IntelSWTools\OpenCL\sdk\bin\GTPin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NetSarang\Xshell 6\;C:\Program Files (x86)\NetSarang\Xftp 6\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Java\jdk1.8.0_202\bin;C:\Program Files (x86)\Java\jre1.8.0_202\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Git\cmd;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\MySQL\MySQL Server 5.7\bin;C:\Go\bin;C:\Program Files\dotnet\;C:\Python27;C:\Users\EDZ\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\EDZ\AppData\Local\Programs\Python\Python38\;C:\Users\EDZ\.cargo\bin;C:\Users\EDZ\AppData\Local\Microsoft\WindowsApps;C:\Program Files\nodejs\node_global;C:\Users\EDZ\go\bin;C:\Go\bin;;."/>
+    <property name="maven.conf" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\plugins\maven\lib\maven3/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="55.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\EDZ"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="user.name" value="EDZ"/>
+    <property name="java.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\plugins\maven\lib\maven3\boot\plexus-classworlds.license"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2020.1.2 package"/>
+    <property name="java.home" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\jbr"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="idea.version2020.1.2" value="true"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="11.0.7"/>
+    <property name="java.vendor" value="JetBrains s.r.o."/>
+    <property name="maven.home" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3\plugins\maven\lib\maven3"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2020-04-14"/>
+    <property name="java.vendor.url.bug" value="https://youtrack.jetbrains.com"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.vendor.version" value="JBR-11.0.7.10-765.53-jfx"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="TestLSSS" name="testLSSSEngine" time="4.263"/>
+</testsuite>
