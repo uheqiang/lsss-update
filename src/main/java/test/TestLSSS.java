@@ -9,6 +9,7 @@ import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.jpbc.PairingParameters;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
+import junit.framework.TestCase;
 import org.bouncycastle.crypto.CipherParameters;
 import org.bouncycastle.crypto.InvalidCipherTextException;
 import org.junit.Assert;
@@ -23,7 +24,7 @@ import java.util.Arrays;
  * @create: 2020-05-27
  **/
 //extends TestCase
-public class TestLSSS {
+public class TestLSSS extends TestCase {
     private AccessControlEngine accessControlEngine;
     private LSSSCPABE engine;
 

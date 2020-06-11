@@ -20,10 +20,7 @@ import org.web3j.protocol.Web3j;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: lsss
@@ -62,19 +59,18 @@ public class DUOperator {
         List<Utf8String> setattributes = null;
         try {
             setattributes = lsss.searchData(myv).send().getValue();
-            System.out.println("得到的以太坊中的属性合集是：" + setattributes);
+            System.out.println("DU得到的以太坊中的属性合集是：" + setattributes);
             boolean temp = false;
             for (String attribute : attributes) {
                 for (Utf8String setattribute : setattributes) {
                     String att = setattribute.getValue();
-                    System.out.println(att);
                     if (att.trim().equals(attribute.trim())) {
                         temp = true;
                         break;
                     }
                 }
                 if (!temp) {
-                    System.out.println("属性集合不符合请检查");
+                    System.out.println("属性集合不符合或者版本号过期请检查");
                     return false;
                 }
             }
@@ -110,6 +106,7 @@ public class DUOperator {
                     //以太坊网络存储的是hash
                     hash = new Bytes32(hash32);
                 }
+                System.out.println("DU从ipfs上得到的智能合约的地址是:" + address + "文件的哈希为" + Arrays.toString(b));
                 lsss = StorageLSSS_sol_StorageLSSS.load(address, web3j, credentials, Constants.GAS_PRICE, Constants.GAS_LIMIT);
                 boolean temp = lsss.checkHash_FileId(hash).send().getValue();//智能check get不了文件的id
 
@@ -117,6 +114,7 @@ public class DUOperator {
                     if (temp) {
                         //得到加密的文件
                         file = new String(IpfsFile.get(huffmanImpl1.decode(result2)));
+                        System.out.println("DU从Ipfs网络得到文件的ECKM是:" + file);
                     }
                 } else {
                     System.out.println("哈夫曼解码失败");
@@ -138,6 +136,7 @@ public class DUOperator {
             }
         }
         Utf8String myv = new Utf8String(v);
+        System.out.println("DU加入的属性版本是" + v + "DU加入的属性集合是" + Arrays.toString(attributes));
         DynamicArray<Utf8String> attri = new DynamicArray(Utf8String.class, newatt);
         lsss.serializationData(attri, myv);
     }
@@ -147,13 +146,9 @@ public class DUOperator {
         String time = null;
         try {
             time = lsss.getInterval().send().getValue();
-            System.out.println("time" + time);
             long time1 = Long.parseUnsignedLong(time, 16);//getTime的时间戳
-            System.out.println(time1);
             Date date = new Date();
-            System.out.println("date" + date);
             long time2 = date.getTime() / 1000;
-            System.out.println(time2);
             return time1 > time2;
         } catch (Exception e) {
             e.printStackTrace();
@@ -171,7 +166,8 @@ public class DUOperator {
             ct = lsss.getCipherText(hash).send().getValue();//得到CT文件的IPFS的路径
             //byteArraySecretKey
             String skp = lsss.getSecretKey().send().getValue();
-            String tt = new String(IpfsFile.get(skp));//字符串
+            String tt = new String(IpfsFile.get(skp));//字符串是哈希ID
+
             HuffmanAlgorithmImpl1 huffmanImpl1 = new HuffmanAlgorithmImpl1();
             //  System.out.println("tt:" + tt);
             byteArraySecretKey = huffmanImpl1.conver2StringToByte(tt);//得到cipher
@@ -179,7 +175,7 @@ public class DUOperator {
 
             String ct1 = new String(IpfsFile.get(ct));
             byteArrayCiphertext = huffmanImpl1.conver2StringToByte(ct1);
-            /* System.out.println("DU输出的密文是" + byteArrayCiphertext);*/
+            System.out.println("DU得到输出的密文是" + Arrays.toString(byteArrayCiphertext));
 
 
             //将skpie变成sk
@@ -187,9 +183,11 @@ public class DUOperator {
             SecretKeySpec key = new SecretKeySpec(ACOperator.skKey, "AES");
             cipher.init(Cipher.DECRYPT_MODE, key);// 初始化为加密模式的密码器
             byte[] skpie = cipher.doFinal(byteArraySecretKey);// 解密 生成了SK
+            System.out.println("DU得到SK是" + Arrays.toString(skpie));
 
             String pkk = lsss.getPK().send().getValue();
             byteArrayPublicKey = huffmanImpl1.conver2StringToByte(pkk);
+            System.out.println("DU得到PK是" + Arrays.toString(byteArrayPublicKey));
 
             CipherParameters anPublicKey = TestUtils.deserCipherParameters(byteArrayPublicKey);
             PairingKeySerParameter publicKey = (PairingKeySerParameter) anPublicKey;
@@ -204,8 +202,8 @@ public class DUOperator {
             byte[] ck = new byte[32];
             for (int i = 0; i < ck.length; i++) {
                 ck[i] = (byte) (k1_[i] ^ k2[i]);
-                System.out.print(ck[i] + " ");//ck得到的是对的
             }
+            System.out.print("DU通过运算得到ck为：" + Arrays.toString(ck));//ck得到的是对的
 
             Cipher cipher1 = Cipher.getInstance("AES");// 创建密码器
             SecretKeySpec key1 = new SecretKeySpec(ck, "AES");

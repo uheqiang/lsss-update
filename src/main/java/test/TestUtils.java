@@ -10,7 +10,7 @@ import java.io.*;
  * Utilities used in Unit Test
  */
 public class TestUtils {
-    public static final String TEST_PAIRING_PARAMETERS_PATH_a_80_256 =  "params/a_80_256.properties";//"./params/a_80_256.properties";
+    public static final String TEST_PAIRING_PARAMETERS_PATH_a_80_256 =  "src/main/java/params/a_80_256.properties";//"./params/a_80_256.properties";
     public static final String TEST_PAIRING_PARAMETERS_PATH_a1_2_128 = "params/a1_2_128.properties";
     public static final String TEST_PAIRING_PARAMETERS_PATH_a1_3_128 = "params/a1_3_128.properties";
 

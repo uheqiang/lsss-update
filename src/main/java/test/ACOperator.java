@@ -85,6 +85,7 @@ public class ACOperator {
         Assert.assertEquals(publicKey, anPublicKey);//判断类型是否匹配
         publicKey = (PairingKeySerParameter) anPublicKey;
         byteArrayPublicKey = byteArrayPublic_Key;
+        System.out.println("生成的PK是:" + Arrays.toString(byteArrayPublicKey));
 
 
         //master
@@ -103,14 +104,12 @@ public class ACOperator {
         }
         Assert.assertEquals(masterKey, anMasterKey);
         masterKey = (PairingKeySerParameter) anMasterKey;
-
-        // Pairing pairing = PairingFactory.getPairing(pairingParameters);
     }
 
     //将PK存储到以太坊链数据库中，调用AC的账户名
     public void setPKtoEthereum() {
         Utf8String pk = new Utf8String(Arrays.toString(this.byteArrayPublicKey));
-        System.out.println("AC设置的PK是" + pk.getValue());
+        System.out.println("AC存储到以太坊的PK是：" + pk.getValue());
         try {
             lsss.setPK(pk).send();
         } catch (Exception e) {
@@ -162,6 +161,7 @@ public class ACOperator {
             CipherParameters anSecretKey = TestUtils.deserCipherParameters(byteArraySecretKey);
             Assert.assertEquals(secretKey, anSecretKey);
             secretKey = (PairingKeySerParameter) anSecretKey;
+            System.out.println("AC生成的SK是:" + Arrays.toString(byteArraySecretKey));
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

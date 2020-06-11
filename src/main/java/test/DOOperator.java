@@ -84,7 +84,6 @@ public class DOOperator {
         assert kgen != null;
         kgen.init(256);
         // 根据用户密码，生成一个密钥
-//50 -26 58 42 17 91 -2 120 -53 100 51 124 21 -6 19 54 -94 -89 59 -29 -67 71 -85 118 109 -123 -9 -72 99 -81 72 8
         SecretKey secretKey = kgen.generateKey();
         SecretKey secretKey1 = kgen.generateKey();
         ck = new byte[32];
@@ -94,9 +93,9 @@ public class DOOperator {
         //long k22 = Long.parseLong(Arrays.toString(k2));
         for (int i = 0; i < ck.length; i++) {
             ck[i] = (byte) (k1[i] ^ k2[i]);
-            System.out.print(ck[i] + " ");
         }
-        // System.out.println(Arrays.toString(k1) + " " + Arrays.toString(k2) + " " + Arrays.toString(ck));
+        System.out.println("DO设置的ck为");
+        System.out.println(Arrays.toString(ck));
     }
 
     //DO 发布元数据集
@@ -150,18 +149,19 @@ public class DOOperator {
                     try {
                         String hashID = IpfsFile.add(Arrays.toString(result).getBytes());
                         //以Qm开头有很多位。对返回的文件的id进行编码，根据hashID可以得到文件的ECKM
-                        System.out.println("上传的文件的哈希ID为" + hashID);
+                        System.out.println("DO上传的经过ck加密的ECK的文件的哈希ID为" + hashID);
 
                         HuffmanAlgorithmImpl1 huffmanImpl1 = new HuffmanAlgorithmImpl1();
                         EncodeResult result = huffmanImpl1.encode(hashID);
                         //得到编码的文本
                         letterCode = huffmanImpl1.getLetterCode(hashID);
 
-                        hashEncode = result.getEncode();
+                        hashEncode = result.getEncode();//111111010101010101010101010
+
                         //将二进制字符串转化为字节数组
                         byte[] b = huffmanImpl1.conver2HexToByte(hashEncode);
 
-                        System.out.println("哈希ID的哈夫曼编码为" + result.getEncode());
+                        System.out.println("哈希ID的哈夫曼编码为" + hashEncode);
                         if (hashID != null) {
                             //存储到智能合约中
                             byte[] hash32 = new byte[32];
@@ -169,6 +169,7 @@ public class DOOperator {
                             System.arraycopy(b, 0, hash32, 0, b.length);
                             //以太坊网络存储的是hash
                             hash = new Bytes32(hash32);
+                            System.out.println("DO将文件的哈希ID上传到以太坊网络中--------");
                             lsss.setHash_FileId(hash).send();
                         } else {
                             System.out.println("文件上传ipfs失败");
@@ -190,6 +191,7 @@ public class DOOperator {
             HuffmanAlgorithmImpl1 huffmanImpl1 = new HuffmanAlgorithmImpl1();
             CipherParameters anPublicKey = TestUtils.deserCipherParameters(huffmanImpl1.conver2StringToByte(PK));
             publicKey = (PairingKeySerParameter) anPublicKey;
+            System.out.println("DO从以太坊中得到的PK为:" + PK);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -203,14 +205,14 @@ public class DOOperator {
             //Encryption and serialization
             //把k1进行加密
             Element k1_element = pairing.getGT().newElementFromBytes(k1).getImmutable();
-            PairingCipherSerParameter ciphertext = engine.encryption(publicKey, accessPolicy, rhos, k1_element, setv); //用setv加密
+            PairingCipherSerParameter ciphertext = engine.encryption(publicKey, accessPolicy, rhos, k1_element, setv.trim()); //用setv加密
             //可以将Ciphertext 数组流化。
             byte[] byteArrayCipher_text = TestUtils.SerCipherParameter(ciphertext);
             CipherParameters anCiphertext = TestUtils.deserCipherParameters(byteArrayCipher_text);
             Assert.assertEquals(ciphertext, anCiphertext);
             byteArrayCipherext = byteArrayCipher_text;
             ciphertext = (PairingCipherSerParameter) anCiphertext;
-            // //System.out.println("message=" + message);
+            System.out.println("DO生成的密文是：" + Arrays.toString(byteArrayCipherext));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -220,16 +222,16 @@ public class DOOperator {
 
     //将CT存储到区块链网络中
     public void saveCTtoIPFS() throws IOException {
-        //new LSSSCiphertextSerParameter(publicKeyParameter.getParameters(), CPrime, rhom, C, C0, C1i, C2i, C3i, C1v, C2v, C3v);
-
         //将ct文件存储在ipfs网络中，返回的是ct文件的路径保存在智能合约中
         String hashID = IpfsFile.add(Arrays.toString(this.byteArrayCipherext).getBytes());
+        System.out.println("DO加密的文件CT的ipfs路径是" + hashID);
         if (hashID != null) {
             //存储到智能合约中
            /* byte[] hash32 = new byte[32];
             System.arraycopy(hashID.getBytes(), 0, hash32, 0, b.length);*/
             Utf8String ct = new Utf8String(hashID);
             try {
+                System.out.println("DO开始将CT的ipfs路径上传到智能合约中---------------");
                 lsss.setCipherText(hash, ct).send();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -258,7 +260,6 @@ public class DOOperator {
 
             Address address1 = new Address(duaddress);
             Utf8String time_utf = new Utf8String(stap);
-            System.out.println("time_utf：" + time_utf.getValue());
             lsss.setInterval(address1, time_utf).send();
         } catch (Exception e) {
             e.printStackTrace();

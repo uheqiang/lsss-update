@@ -67,22 +67,24 @@ public class TestALL {
         Web3j web3j = Web3j.build(new HttpService("http://localhost:8545"));
 
         /*-----------------------DO操作------------------------------------*/
+        System.out.println(" /*-----------------------DO操作------------------------------------*/");
         String password = Constants.DO_PASSWORD;
         String path = Constants.DO_PATH;
         DOOperator doOperator = new DOOperator(engine, pairing, web3j, password, path);
 
         //1.随机生成256位的密钥对
+        System.out.println("    DO生成密钥对并且生成ck");
         doOperator.generateK1K2();
         //2.发布元数据集 参数位转化的设置的属性集以及相应的版本
         //AccessPolicyExamples.access_policy_attribute, AccessPolicyExamples.v
         Scanner scanner1 = new Scanner(System.in);
         String attribute = null;
         List<Utf8String> access_policy_attribute = new ArrayList<>();
-        System.out.println("DO请输入设置的属性集合，每个属性之间用空格分离：");
+        System.out.println("    DO请输入设置的属性集合，每个属性之间用空格分离：");
         if (scanner1.hasNext()) {
             attribute = scanner1.nextLine();
         }
-        System.out.println("DO输入的属性集合为：" + attribute);
+        System.out.println("    DO输入的属性集合为：" + attribute);
         assert attribute != null;
         String[] attributes = attribute.split(" ");
         access_policy_attribute.add(new Utf8String(" "));
@@ -94,14 +96,14 @@ public class TestALL {
         String setv = null;//用户设置的版本号
         Utf8String access_policy_v = null;
         Scanner scanner2 = new Scanner(System.in);
-        System.out.println("DO请输入设置的版本号：");
+        System.out.println("    DO请输入设置的版本号：");
         if (scanner2.hasNext()) {
             setv = scanner2.nextLine();
             if (setv != null) {
                 access_policy_v = new Utf8String(setv.trim());
             }
         }
-        System.out.println("DO输入的版本号为：" + setv);
+        System.out.println("    DO输入的版本号为：" + setv);
         if (access_policy_v != null) {
             System.out.println("发布元数据开始-----------------------------");
             DynamicArray<Utf8String> attri = new DynamicArray(Utf8String.class, access_policy_attribute);
@@ -113,11 +115,11 @@ public class TestALL {
 
         String accessPolicyString = null;
         Scanner scanner3 = new Scanner(System.in);
-        System.out.println("请输入属性的访问策略：");//例如 "60 and 0 and 1 and (2 or 3)";
+        System.out.println("    请输入属性的访问策略：");//例如 "60 and 0 and 1 and (2 or 3)";
         if (scanner3.hasNext()) {
             accessPolicyString = scanner3.nextLine();
         }
-        System.out.println("输入的访问策略为：" + accessPolicyString);
+        System.out.println("    输入的访问策略为：" + accessPolicyString);
 
         //生成属性集
         int[][] accessPolicy = ParserUtils.GenerateAccessPolicy(accessPolicyString);//包含v attributes中无需包含v但是最后要加上去
@@ -126,22 +128,23 @@ public class TestALL {
 
         //设置循环操作，并且编译为响应的jar可执行文件
         /*-----------------------DU操作------------------------------------*/
+        System.out.println("/*-----------------------DU操作------------------------------------*/");
         String v = null;//Du的版本号
         Scanner scanner4 = new Scanner(System.in);
-        System.out.println("DU输入版本号：");//例如 "60 and 0 and 1 and (2 or 3)";
+        System.out.println("    DU输入版本号：");//例如 "60 and 0 and 1 and (2 or 3)";
         if (scanner4.hasNext()) {
             v = scanner4.nextLine();
             v = v.trim();
         }
-        System.out.println("DU输入的版本号为：" + v);
+        System.out.println("    DU输入的版本号为：" + v);
 
         String attr = null;
         Scanner scanner5 = new Scanner(System.in);
-        System.out.println("DU输入属性集合(用空格分离)：");//例如 "60 and 0 and 1 and (2 or 3)";
+        System.out.println("    DU输入属性集合(用空格分离)：");//例如 "60 and 0 and 1 and (2 or 3)";
         if (scanner5.hasNext()) {
             attr = scanner5.nextLine();//new String[]{"0", "1", "2"};
         }
-        System.out.println("DU输入的属性集合为：" + attr);
+        System.out.println("    DU输入的属性集合为：" + attr);
         assert attr != null;
         String[] attrs = attr.split(" ");
 
@@ -175,67 +178,87 @@ public class TestALL {
         //Arrays.copyOf(newattribute, count)
         //Arrays.copyOf(newattribute, count)
 
-
+        System.out.println("/*-----------------------AC操作------------------------------------*/");
         /*-----------------------AC操作------------------------------------*/
         //3.生成访问策略，执行CP-ABE初始化算法2 生成公钥PK和系统主密钥MSK。
         ACOperator acOperator = new ACOperator(engine, web3j, Constants.AC_PASSWORD, Constants.AC_PATH, pairingParameters, Arrays.copyOf(newattribute, count), v, setv);
+        System.out.println("    AC生成PK和MSK开始----------");
         acOperator.setup();
         //4.将PK存储到以太坊的的智能合约中。
+        System.out.println("    AC将PK存储到以太坊的的智能合约中。");
         acOperator.setPKtoEthereum();
 
 
 
         /* -----------------------DO操作------------------------------------*/
+        System.out.println("  /* -----------------------DO操作------------------------------------*/");
         //5.6.7. DO选择上传的文件M使用密钥ck利用对称加密机制（AES，3DES）等加密文件M，生成密文Eck(M)。将加密后的文件上传到ipfs存储网络。
+        System.out.println("    DO用ck加密文件");
         doOperator.aesData();
         //8.获取公钥PK
+        System.out.println("    DO从智能合约中获取系统的公钥PK");
         doOperator.getPK();
         //9.生成密文CT
-        System.out.println("setv=" + setv);
+        System.out.println("    DO生成密文CT");
         doOperator.generateCT(accessPolicy, rhos, setv);
         //10.11.将CT存储在ipfs网络中。
+        System.out.println("    DO将CT的ipfs的地址存储在ipfs网络中。");
         doOperator.saveCTtoIPFS();
         //12.将智能合约的地址以及hashid打包上传到ipfs网络中
+        System.out.println("    将智能合约的地址以及hashid打包上传到ipfs网络中");
         String packHashID = doOperator.packAll();//将文件打包到ipfs区块链网络得到的文件的打包后的ID。
+        System.out.println("得到智能合约的地址是" + packHashID);
 
 
         /*-----------------------DU操作------------------------------------*/
-        System.out.println("DU检查文件是否在区块链中");
+        System.out.println("    /*-----------------------DU操作------------------------------------*/");
+        System.out.println("    DU检查文件是否在区块链中");
         //14.15.DU检查文件的哈希ID，并且获得加密后的文件ECKM
         duOperator.checkHashId(packHashID);
-        System.out.println("DU检查自己的属性是否满足");
+        System.out.println("    DU检查自己的属性是否满足");
         //13.DU查看自己的属性是否满足
         boolean ifcansearch = duOperator.checkAttribute();
         if (!ifcansearch) {
-            System.out.println("属性不满足");
+            System.out.println("    属性不满足");
             System.exit(0);
         }
+        System.out.println("    DU在智能合约中加入自己的属性集合");
         //16.DU设置自己的属性集
         duOperator.askAttribute();
 
         /*-----------------------AC操作------------------------------------*/
+        System.out.println(" /*-----------------------AC操作------------------------------------*/");
         //17.将用户的属性字段和区块链已经存储的属性字段进行比较。参数是DU的地址
+        System.out.println("    AC将用户的属性字段和区块链已经存储的属性字段进行比较");
         boolean compare = acOperator.compareAttribute(Constants.DU1_PATH.split("--")[2]);
         if (!compare) {
             System.exit(0);
         }
+        System.out.println("    AC根据用户生成密钥SK");
         //18.生成SK。
         acOperator.keygen();
+        System.out.println("    AC将SK‘存储到以太坊区块链中");
         //19 将SK‘存储到以太坊区块链中
         acOperator.putSKtoIpfs(Constants.DU1_PATH.split("--")[2]);
 
 
         /*-----------------------DO操作------------------------------------*/
+        System.out.println("/*-----------------------DO操作------------------------------------*/");
         //20.DO添加有效期限
+        System.out.println("    DO添加的有效期限是：" + "2020-06-13 24:00:00");
         doOperator.setInterval(Constants.DU1_PATH.split("--")[2], "2020-06-13 24:00:00");
 
         /*-----------------------DU操作------------------------------------*/
+
+        System.out.println("/*-----------------------DU操作------------------------------------*/");
         //21.DU获取有效期限
+        System.out.println("    DU获取有效期限：");
         boolean time = duOperator.getInterval();
         if (!time) {
             System.out.println("访问时间已经过期");
             System.exit(0);
         }
+        System.out.println("    DU开始进行解密------------------------------------------------");
         //21.22. DU进行密钥的解密
         String addr = null;
         String name = null;

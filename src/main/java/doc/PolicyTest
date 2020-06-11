@@ -1,0 +1,328 @@
+Test example 1
+尝试的策略是：60 and 0 and 1 and (2 or 3)-------版本号是：60
+用户a：属性：[0, 1, 2]版本号60
+message={x=76303550787712797397018730880183509347874716804475559080254118837262391819730,y=23069143127351662696393573639423902682574666138756172801976784289058517758264}
+anmessage={x=76303550787712797397018730880183509347874716804475559080254118837262391819730,y=23069143127351662696393573639423902682574666138756172801976784289058517758264}
+验证成功
+用户b：属性：[0, 1, 2, 3]版本号60
+message={x=56587867616411617230198639139230938140314800279088432244991356947274473974775,y=39419744773413388822896934924888129575567560962336494625069999859120935345455}
+anmessage={x=56587867616411617230198639139230938140314800279088432244991356947274473974775,y=39419744773413388822896934924888129575567560962336494625069999859120935345455}
+验证成功
+用户c：属性：[1, 2, 3]版本号60
+message={x=69719062081683489747220833902434283605198496908666519137838273744663168550202,y=4019598662070314651870241930882509067898744047234532610227376389804845281336}
+Access policy satisfied test failed, access policy = 60 and 0 and 1 and (2 or 3), attributes = [1, 2, 3]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy(TestLSSS.java:337)
+	at test.TestLSSS.try_invalid_access_policy(TestLSSS.java:299)
+	at test.TestLSSS.runAllTests(TestLSSS.java:48)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+Test example 2
+尝试的策略是：(60 and (0 and 1 and 2) and (3 or 4 or 5) and (6 and 7 and (8 or 9 or 10 or 11)))-------版本号是：60
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+用户a：属性：[0, 1, 2, 4, 6, 7, 10]版本号60
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+message={x=16559159651668368497167415013176267119224120679852809300903699737046148618627,y=75968457931912619561244023410059286843169202194761817515301676194636560138245}
+anmessage={x=16559159651668368497167415013176267119224120679852809300903699737046148618627,y=75968457931912619561244023410059286843169202194761817515301676194636560138245}
+验证成功
+用户b：属性：[0, 1, 2, 5, 4, 6, 7, 8, 9, 10, 11]版本号60
+message={x=25808810665860129986687310781822980078642589460215771240654861910439960822498,y=32162674486681805842700002904639841652865949206654969973098949290725060791338}
+anmessage={x=25808810665860129986687310781822980078642589460215771240654861910439960822498,y=32162674486681805842700002904639841652865949206654969973098949290725060791338}
+验证成功
+用户c：属性：[0, 1, 2, 6, 7, 10]版本号60
+message={x=53367494738046197283309477057608462064297961611034663180151864341876440787969,y=33719280702393740234528576136890902784811370433513751744539036498524511280664}
+Access policy satisfied test failed, access policy = (60 and (0 and 1 and 2) and (3 or 4 or 5) and (6 and 7 and (8 or 9 or 10 or 11))), attributes = [0, 1, 2, 6, 7, 10]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy(TestLSSS.java:337)
+	at test.TestLSSS.try_invalid_access_policy(TestLSSS.java:299)
+	at test.TestLSSS.runAllTests(TestLSSS.java:67)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+用户d：属性：[0, 1, 2, 4, 6, 10]版本号60
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+message={x=22761965218802560671078812120488499835802314609108679785281019252425325628327,y=422081795900261843494305706053150497070705387934732840108962925452055447870}
+Access policy satisfied test failed, access policy = (60 and (0 and 1 and 2) and (3 or 4 or 5) and (6 and 7 and (8 or 9 or 10 or 11))), attributes = [0, 1, 2, 4, 6, 10]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy(TestLSSS.java:337)
+	at test.TestLSSS.try_invalid_access_policy(TestLSSS.java:299)
+	at test.TestLSSS.runAllTests(TestLSSS.java:72)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+用户e：属性：[0, 1, 2, 3, 6, 7]版本号60
+message={x=24120711065444593212115593312264357084719705098206707021811375096140685783528,y=60475624583321232695366037078120842489308241265298224889650649783901044750539}
+Access policy satisfied test failed, access policy = (60 and (0 and 1 and 2) and (3 or 4 or 5) and (6 and 7 and (8 or 9 or 10 or 11))), attributes = [0, 1, 2, 3, 6, 7]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy(TestLSSS.java:337)
+	at test.TestLSSS.try_invalid_access_policy(TestLSSS.java:299)
+	at test.TestLSSS.runAllTests(TestLSSS.java:77)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+Test example 3
+尝试的策略是：60 and 00 and 01 and 02 and 03 and 04 and 05 and 06 and 07 and 08 and 09 and 10 and 11 and 12 and 13 and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26 and 27 and 28 and 29 and 30 and 31 and 32 and 33 and 34 and 35 and 36 and 37 and 38 and 39 and 40 and 41 and 42 and 43 and 44 and 45 and 46 and 47 and 48 and 49-------版本号是：60
+用户a：属性：[00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]版本号60
+message={x=64156435675865324101923255087619935391142047066055366882562294574324885031558,y=60735758953273091977692181738262194327553520588083767772665214362502948976166}
+anmessage={x=64156435675865324101923255087619935391142047066055366882562294574324885031558,y=60735758953273091977692181738262194327553520588083767772665214362502948976166}
+验证成功
+用户b：属性：[00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]版本号60
+message={x=6565407734156261407165223632553658027515524268694393792022984434568656317746,y=10854557301393181632602366768163140565495999516632675432379190324977295664409}
+Access policy satisfied test failed, access policy = 60 and 00 and 01 and 02 and 03 and 04 and 05 and 06 and 07 and 08 and 09 and 10 and 11 and 12 and 13 and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26 and 27 and 28 and 29 and 30 and 31 and 32 and 33 and 34 and 35 and 36 and 37 and 38 and 39 and 40 and 41 and 42 and 43 and 44 and 45 and 46 and 47 and 48 and 49, attributes = [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy(TestLSSS.java:337)
+	at test.TestLSSS.try_invalid_access_policy(TestLSSS.java:299)
+	at test.TestLSSS.runAllTests(TestLSSS.java:91)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+用户c：属性：[04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]版本号60
+message={x=30568706754407005205260035395336994283557239936315075572772380929430795177195,y=41641461267120747974267263623895315056549190103086293818314322557518990594667}
+Access policy satisfied test failed, access policy = 60 and 00 and 01 and 02 and 03 and 04 and 05 and 06 and 07 and 08 and 09 and 10 and 11 and 12 and 13 and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26 and 27 and 28 and 29 and 30 and 31 and 32 and 33 and 34 and 35 and 36 and 37 and 38 and 39 and 40 and 41 and 42 and 43 and 44 and 45 and 46 and 47 and 48 and 49, attributes = [04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy(TestLSSS.java:337)
+	at test.TestLSSS.try_invalid_access_policy(TestLSSS.java:299)
+	at test.TestLSSS.runAllTests(TestLSSS.java:96)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+尝试版本号
+尝试的策略是：60 and 00 and 01 and 02 and 03 and 04 and 05 and 06 and 07 and 08 and 09 and 10 and 11 and 12 and 13 and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26 and 27 and 28 and 29 and 30 and 31 and 32 and 33 and 34 and 35 and 36 and 37 and 38 and 39 and 40 and 41 and 42 and 43 and 44 and 45 and 46 and 47 and 48 and 49-------版本号是：60
+用户a：属性：[00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]版本号50
+版本需要更新
+message={x=33332008378506422550831821246936135688595117782230083859552281333234278463331,y=56714231123091122312271379994200285433179024583910847330522822538751773426702}
+Access policy satisfied test failed, access policy = 60 and 00 and 01 and 02 and 03 and 04 and 05 and 06 and 07 and 08 and 09 and 10 and 11 and 12 and 13 and 14 and 15 and 16 and 17 and 18 and 19 and 20 and 21 and 22 and 23 and 24 and 25 and 26 and 27 and 28 and 29 and 30 and 31 and 32 and 33 and 34 and 35 and 36 and 37 and 38 and 39 and 40 and 41 and 42 and 43 and 44 and 45 and 46 and 47 and 48 and 49, attributes = [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+java.lang.NullPointerException
+	at cpabe.utils.PairingUtils.NotVerifyCipherParameterInstance(PairingUtils.java:305)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:100)
+	at test.TestLSSS.try_access_policy(TestLSSS.java:337)
+	at test.TestLSSS.try_valid_access_policy(TestLSSS.java:182)
+	at test.TestLSSS.runAllTests(TestLSSS.java:104)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+尝试多个属性
+尝试的策略是：60 and 0 and (1 or 5) and (2 or (1 and 4))-------版本号是：60
+用户a：属性：[0, 1, 2]版本号60
+message={x=69115979371204497950746726122221335032400457105904930782350764310296298097639,y=47381783415105807663193540092829175234845220050786389300494245826587612022224}
+anmessage={x=69115979371204497950746726122221335032400457105904930782350764310296298097639,y=47381783415105807663193540092829175234845220050786389300494245826587612022224}
+验证成功
+尝试策略更新
+尝试的策略是：旧策略60 and 0 and 1 and (2 or 3)-------版本号是：60
+尝试的策略是：新策略60 and 0 and (1 or 5) and (2 or (1 and 4))-------版本号是：60
+用户a：属性：[0, 1, 2]版本号60
+message={x=11726875665113610279607083401114427965519328415056970598935737089849734754922,y=51841826603702652416559470872329129463383228101756547454529304188856433485791}
+anmessage={x=11726875665113610279607083401114427965519328415056970598935737089849734754922,y=51841826603702652416559470872329129463383228101756547454529304188856433485791}
+更新策略验证成功
+用户b：属性：[0, 1, 4]版本号60
+message={x=55109894923088709794783851660858972579938321314432897511771330760035062675879,y=66420371529055132794980170140829307368826834135472257170161488798517098737319}
+anmessage={x=55109894923088709794783851660858972579938321314432897511771330760035062675879,y=66420371529055132794980170140829307368826834135472257170161488798517098737319}
+更新策略验证成功
+用户c：属性：[0, 1, 2, 4]版本号60
+message={x=78241927110794191283058392914209030041479890590431648985676033134688057407037,y=2552655190016362457237149227398348783137716833801840425110160212230851638566}
+anmessage={x=78241927110794191283058392914209030041479890590431648985676033134688057407037,y=2552655190016362457237149227398348783137716833801840425110160212230851638566}
+更新策略验证成功
+用户d：属性：[0, 1]版本号60
+message={x=13954681733654987675592624041945606136971286652155726382019180874720039603690,y=28516457591934335796917032660241315034195583053747460088541464812285596270328}
+Access policy satisfied test failed, attributes = [0, 1]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy_update(TestLSSS.java:260)
+	at test.TestLSSS.try_valid_access_policy1(TestLSSS.java:224)
+	at test.TestLSSS.runAllTests(TestLSSS.java:137)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+用户e：属性：[1, 2, 3]版本号60
+message={x=22041997685813635688786693803503143497051289707185232177622370299245570104181,y=73195234058731433498143479456779297413566706622549093016434641489625091273778}
+Access policy satisfied test failed, attributes = [1, 2, 3]
+cpabe.access.UnsatisfiedAccessControlException: Give attribute set does not satisfy access policy
+	at cpabe.access.AccessControlParameter.minSatisfiedAttributeSet(AccessControlParameter.java:40)
+	at cpabe.access.LSSSPolicyEngine.reconstructOmegas(LSSSPolicyEngine.java:210)
+	at cpabe.generators.LSSSDescryptionGenerator.computeDecapsulation(LSSSDescryptionGenerator.java:61)
+	at cpabe.generators.LSSSDescryptionGenerator.recoverMessage(LSSSDescryptionGenerator.java:96)
+	at cpabe.LSSSCPABE.decryption(LSSSCPABE.java:108)
+	at test.TestLSSS.try_access_policy_update(TestLSSS.java:260)
+	at test.TestLSSS.try_valid_access_policy1(TestLSSS.java:224)
+	at test.TestLSSS.runAllTests(TestLSSS.java:142)
+	at test.TestLSSS.testLSSSEngine(TestLSSS.java:370)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+
+Process finished with exit code 0
